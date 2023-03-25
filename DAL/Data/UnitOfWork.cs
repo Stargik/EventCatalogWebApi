@@ -18,6 +18,7 @@ namespace DAL.Data
         private IEventSubjectCategoryRepository eventSubjectCategoryRepository;
         private ISpeakerRepository speakerRepository;
         private IParticipantRepository participantRepository;
+
         public IEventRepository EventRepository
         {
             get
