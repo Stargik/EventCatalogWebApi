@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using BLL.Interfaces;
 using BLL.Models;
+using BLL.Validation;
+using DAL.Entities;
 using DAL.Interfaces;
+using DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,34 +25,72 @@ namespace BLL.Services
             this.mapper = mapper;
             participantRepository = unitOfWork.ParticipantRepository;
         }
-        public Task AddAsync(ParticipantModel model)
+        public async Task AddAsync(ParticipantModel model)
         {
-            throw new NotImplementedException();
+            await ParticipantModelValidate(model);
+            var participant = mapper.Map<Participant>(model);
+            await participantRepository.AddAsync(participant);
+            await unitOfWork.SaveAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await participantRepository.DeleteByIdAsync(id);
+            await unitOfWork.SaveAsync();
         }
 
-        public Task<IEnumerable<ParticipantModel>> GetAllAsync()
+        public async Task<IEnumerable<ParticipantModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var participants = await participantRepository.GetAllWithDetailsAsync();
+            var participantModels = mapper.Map<IEnumerable<Participant>, IEnumerable<ParticipantModel>>(participants);
+            return participantModels;
         }
 
-        public Task<ParticipantModel> GetByIdAsync(int id)
+        public async Task<ParticipantModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var participant = await participantRepository.GetByIdWithDetailsAsync(id);
+            var participantModel = mapper.Map<ParticipantModel>(participant);
+            return participantModel;
         }
 
-        public Task<IEnumerable<ParticipantModel>> GetParticipantsByEventIdAsync(int eventId)
+        public async Task<IEnumerable<ParticipantModel>> GetParticipantsByEventIdAsync(int eventId)
         {
-            throw new NotImplementedException();
+            var _event = await unitOfWork.EventRepository.GetByIdWithDetailsAsync(eventId);
+            if (_event is null)
+            {
+                throw new EventCatalogException("Incorrect event info", "Id");
+            }
+            var participantModels = mapper.Map<IEnumerable<Participant>, IEnumerable<ParticipantModel>>(_event.Participants);
+            return participantModels;
         }
 
-        public Task UpdateAsync(ParticipantModel model)
+        public async Task UpdateAsync(ParticipantModel model)
         {
-            throw new NotImplementedException();
+            await ParticipantModelValidate(model);
+            var participantOld = await participantRepository.GetByIdAsync(model.Id);
+            if (participantOld is null)
+            {
+                throw new EventCatalogException("Incorrect ParticipantModel info (participant with this id is not exist)", "Id");
+            }
+            var participant = mapper.Map<Participant>(model);
+            await participantRepository.UpdateAsync(participant);
+            await unitOfWork.SaveAsync();
+        }
+
+        private async Task ParticipantModelValidate(ParticipantModel participantModel)
+        {
+            if (participantModel is null)
+            {
+                throw new EventCatalogException("Incorrect ParticipantModel info", "SpeakerModel");
+            }
+            if (String.IsNullOrEmpty(participantModel.Email))
+            {
+                throw new EventCatalogException("Incorrect ParticipantModel info", "Email");
+            }
+            if (String.IsNullOrEmpty(participantModel.Name))
+            {
+                throw new EventCatalogException("Incorrect ParticipantModel info", "Name");
+            }
         }
     }
 }
