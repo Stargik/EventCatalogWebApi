@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using BLL.Interfaces;
 using BLL.Models;
+using BLL.Validation;
+using DAL.Entities;
 using DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -22,34 +19,78 @@ namespace BLL.Services
             this.mapper = mapper;
             speakerRepository = unitOfWork.SpeakerRepository;
         }
-        public Task AddAsync(SpeakerModel model)
+        public async Task AddAsync(SpeakerModel model)
         {
-            throw new NotImplementedException();
+            await SpeakerModelValidate(model);
+            var speaker = mapper.Map<Speaker>(model);
+            await speakerRepository.AddAsync(speaker);
+            await unitOfWork.SaveAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await speakerRepository.DeleteByIdAsync(id);
+            await unitOfWork.SaveAsync();
         }
 
-        public Task<IEnumerable<SpeakerModel>> GetAllAsync()
+        public async Task<IEnumerable<SpeakerModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var speakers = await speakerRepository.GetAllWithDetailsAsync();
+            var speakerModels = mapper.Map<IEnumerable<Speaker>, IEnumerable<SpeakerModel>>(speakers);
+            return speakerModels;
         }
 
-        public Task<SpeakerModel> GetByIdAsync(int id)
+        public async Task<SpeakerModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var speaker = await speakerRepository.GetByIdWithDetailsAsync(id);
+            var speakerModel = mapper.Map<SpeakerModel>(speaker);
+            return speakerModel;
         }
 
-        public Task<SpeakerModel> GetSpeakerByEventIdAsync(int eventId)
+        public async Task<SpeakerModel> GetSpeakerByEventIdAsync(int eventId)
         {
-            throw new NotImplementedException();
+            var _event = await unitOfWork.EventRepository.GetByIdAsync(eventId);
+            if (_event is null)
+            {
+                throw new EventCatalogException("Incorrect event info", "Id");
+            }
+            var speaker = await speakerRepository.GetByIdWithDetailsAsync(_event.SpeakerId);
+            var speakerModel = mapper.Map<SpeakerModel>(speaker);
+            return speakerModel;
         }
 
-        public Task UpdateAsync(SpeakerModel model)
+        public async Task UpdateAsync(SpeakerModel model)
         {
-            throw new NotImplementedException();
+            await SpeakerModelValidate(model);
+            var speakerOld = await speakerRepository.GetByIdAsync(model.Id);
+            if (speakerOld is null)
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info (speaker with this id is not exist)", "Id");
+            }
+            var speaker = mapper.Map<Speaker>(model);
+            await speakerRepository.UpdateAsync(speaker);
+            await unitOfWork.SaveAsync();
+        }
+
+        private async Task SpeakerModelValidate(SpeakerModel speakerModel)
+        {
+            if (speakerModel is null)
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info", "SpeakerModel");
+            }
+            if (String.IsNullOrEmpty(speakerModel.Email))
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info", "Email");
+            }
+            if (String.IsNullOrEmpty(speakerModel.FirstName))
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info", "FirstName");
+            }
+            if (String.IsNullOrEmpty(speakerModel.LastName))
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info", "LastName");
+            }
+            
         }
     }
 }
