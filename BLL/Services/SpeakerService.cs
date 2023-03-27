@@ -29,6 +29,11 @@ namespace BLL.Services
 
         public async Task DeleteAsync(int id)
         {
+            var speaker = await speakerRepository.GetByIdWithDetailsAsync(id);
+            if (speaker is not null && speaker.Events.Any())
+            {
+                throw new InvalidOperationException("Speaker with existing events cannot be deleted.")
+            }
             await speakerRepository.DeleteByIdAsync(id);
             await unitOfWork.SaveAsync();
         }
