@@ -1,6 +1,7 @@
 ﻿
 using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace DAL.Data
 {
@@ -9,9 +10,12 @@ namespace DAL.Data
         public EventCatalogDbContext(DbContextOptions<EventCatalogDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=EventCatalogDb; Trusted_Connection=True;");
+        }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<EventSubjectCategory> EventSubjectCategories { get; set; }
         public DbSet<EventFormat> EventFormats { get; set; }

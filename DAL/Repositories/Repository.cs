@@ -27,7 +27,7 @@ namespace DAL.Repositories
             if (entity is not null)
             {
                 context.Set<T>().Remove(entity);
-            }   
+            }
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -37,12 +37,12 @@ namespace DAL.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await context.Set<T>().FindAsync(id);
+            return await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(T entity)
         {
-            var oldEntity = await context.Set<T>().FindAsync(entity.Id);
+            var oldEntity = await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity.Id);
             if (oldEntity is not null)
             {
                 context.Set<T>().Update(entity);

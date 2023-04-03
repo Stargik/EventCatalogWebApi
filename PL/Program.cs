@@ -1,4 +1,16 @@
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using DAL.Data;
+using Microsoft.Extensions.Configuration;
+using DAL.Interfaces;
+using BLL.Interfaces;
+using BLL.Services;
+using AutoMapper;
+using BLL;
+
 namespace PL
 {
     public class Program
@@ -10,6 +22,16 @@ namespace PL
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<EventCatalogDbContext>(option =>
+                option.UseSqlServer(builder.Configuration.GetConnectionString(SettingStrings.EventCatalogDbConnection))
+            );
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+            builder.Services.AddTransient<IEventService, EventService>();
+            builder.Services.AddTransient<IParticipantService, ParticipantService>();
+            builder.Services.AddTransient<ISpeakerService, SpeakerService>();
+            
+               
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

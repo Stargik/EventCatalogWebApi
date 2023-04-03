@@ -61,6 +61,13 @@ namespace BLL.Services
             return eventModels;
         }
 
+        public async Task<IEnumerable<EventSubjectCategoryModel>> GetAllCategoriesAsync()
+        {
+            var categories = await eventSubjectCategoryRepository.GetAllWithDetailsAsync();
+            var categoryModels = mapper.Map<IEnumerable<EventSubjectCategory>, IEnumerable<EventSubjectCategoryModel>>(categories);
+            return categoryModels;
+        }
+
         public async Task<EventModel> GetByIdAsync(int id)
         {
             var _event = await eventRepository.GetByIdAsync(id);
