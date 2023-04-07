@@ -25,6 +25,10 @@ namespace PL
             builder.Services.AddDbContext<EventCatalogDbContext>(option =>
                 option.UseSqlServer(builder.Configuration.GetConnectionString(SettingStrings.EventCatalogDbConnection))
             );
+
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
             builder.Services.AddTransient<IEventService, EventService>();

@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  pl:
+    image: ${DOCKER_REGISTRY-}pl
+    build:
+      context: .
+      dockerfile: PL/Dockerfile
+    depends_on:
+      - sqlserverService
+    networks:
+      - catalognet
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+
+  sqlserverService:
+    image: mcr.microsoft.com/mssql/server:latest
+    hostname: sqlserverService
+    container_name: sqlserverService
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: paSs1234
+    volumes:
+       - ./data/mssql:/var/opt/mssql3
+    ports:
+       - 1433:1433
+    networks:
+       - catalognet
+
+networks:
+  catalognet:
+    driver: bridge  

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{A396
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{EB47962F-31DD-4B5C-85CD-D8D51A390FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{7EDB1D24-1986-4770-AFFB-D788BF3E1D4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{7EDB1D24-1986-4770-AFFB-D788BF3E1D4D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{349CC9B9-16AE-4637-B4A4-ECAA4468BADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7EDB1D24-1986-4770-AFFB-D788BF3E1D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EDB1D24-1986-4770-AFFB-D788BF3E1D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EDB1D24-1986-4770-AFFB-D788BF3E1D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{349CC9B9-16AE-4637-B4A4-ECAA4468BADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{349CC9B9-16AE-4637-B4A4-ECAA4468BADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{349CC9B9-16AE-4637-B4A4-ECAA4468BADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{349CC9B9-16AE-4637-B4A4-ECAA4468BADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

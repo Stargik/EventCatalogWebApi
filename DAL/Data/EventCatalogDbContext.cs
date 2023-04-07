@@ -1,17 +1,24 @@
 ﻿
 using DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace DAL.Data
 {
-    public class EventCatalogDbContext : DbContext
+    public class EventCatalogDbContext : IdentityDbContext<ApiUser>
     {
-        public EventCatalogDbContext(DbContextOptions<EventCatalogDbContext> options)
+        public EventCatalogDbContext(DbContextOptions<EventCatalogDbContext> options) 
             : base(options)
         {
             //Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=EventCatalogDb; Trusted_Connection=True;");
