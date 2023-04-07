@@ -47,7 +47,7 @@ namespace BLL.Services
             {
                 throw new EventCatalogIdentityException();
             }
-            var user = mapper.Map<ApiUser>(userModel);
+            var user = await userManager.FindByNameAsync(userModel.Email);
             return await CreateToken(user);
         }
 
