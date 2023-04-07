@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.Models;
 using DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace BLL
 {
@@ -26,6 +27,11 @@ namespace BLL
 
             CreateMap<EventFormat, EventFormatModel>()
                 .ReverseMap();
+
+            CreateMap<ApiUser, UserModel>();
+
+            CreateMap<UserModel, ApiUser>()
+                .ForMember(apiUser => apiUser.UserName, x => x.MapFrom(userModel => userModel.Email));
         }
     }
 }
