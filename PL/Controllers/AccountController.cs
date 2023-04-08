@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Common;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PL.Controllers
@@ -16,10 +17,14 @@ namespace PL.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService accountService;
+        private readonly IParticipantService participantService;
+        private readonly IMapper mapper;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IParticipantService participantService, IMapper mapper)
         {
             this.accountService = accountService;
+            this.participantService = participantService;
+            this.mapper = mapper;
         }
 
         [HttpPost("Register")]
@@ -32,7 +37,12 @@ namespace PL.Controllers
             try
             {
                 await accountService.RegisterUser(userModel);
-
+                if (userModel.Roles.FirstOrDefault(roles => roles.ToUpper() == "USER") is not null)
+                {
+                    var participantModel = mapper.Map<ParticipantModel>(userModel);
+                    await participantService.AddAsync(participantModel);
+                }
+                
                 return Accepted();
             }
             catch (Exception ex)

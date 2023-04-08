@@ -6,5 +6,7 @@
         public const string EventCatalogDockerDbConnection = "EventCatalogDockerDbConnection";
 
         public const string JwtSection = "Jwt";
+        public const string JwtIssuer = "Issuer";
+        public const string JwtKey = "Key";
     }
 }

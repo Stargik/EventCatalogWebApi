@@ -12,7 +12,9 @@ namespace BLL.Models
         [Required]
         [DataType (DataType.Password)]
         public string Password { get; set; }
-        
+
+        [Required]
+        public string Name { get; set; }
         public ICollection<string> Roles { get; set; }
     }
 }

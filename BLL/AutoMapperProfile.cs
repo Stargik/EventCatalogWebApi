@@ -32,6 +32,8 @@ namespace BLL
 
             CreateMap<UserModel, ApiUser>()
                 .ForMember(apiUser => apiUser.UserName, x => x.MapFrom(userModel => userModel.Email));
+
+            CreateMap<UserModel, ParticipantModel>();
         }
     }
 }

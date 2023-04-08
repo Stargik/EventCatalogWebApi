@@ -23,8 +23,10 @@ namespace PL.Controllers
 
         // GET: api/<ParticipantsController>
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<ParticipantModel>>> Get()
         {
+            
             var participants = await participantService.GetAllAsync();
             return Ok(participants);
         }
