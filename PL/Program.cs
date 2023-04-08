@@ -38,6 +38,8 @@ namespace PL
             builder.Services.AddTransient<IEventService, EventService>();
             builder.Services.AddTransient<IParticipantService, ParticipantService>();
             builder.Services.AddTransient<ISpeakerService, SpeakerService>();
+
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(SettingStrings.JwtSection));
             builder.Services.AddScoped<IAccountService, AccountService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

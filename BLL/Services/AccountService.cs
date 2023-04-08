@@ -4,7 +4,6 @@ using BLL.Models;
 using BLL.Validation;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,16 +15,14 @@ namespace BLL.Services
     public class AccountService : IAccountService
     {
         private readonly UserManager<ApiUser> userManager;
-        private readonly IConfiguration configuration;
-        private readonly SignInManager<ApiUser> signInManager;
         private readonly IMapper mapper;
+        private readonly JwtSettings jwtSettings;
 
-        public AccountService(UserManager<ApiUser> userManager, IMapper mapper, IConfiguration configuration)
+        public AccountService(UserManager<ApiUser> userManager, IMapper mapper, IOptions<JwtSettings> jwtSettings)
         {
             this.userManager = userManager;
-            this.signInManager = signInManager;
             this.mapper = mapper;
-            this.configuration = configuration;
+            this.jwtSettings = jwtSettings.Value;
         }
 
         public async Task RegisterUser(UserModel userModel)
@@ -75,11 +72,10 @@ namespace BLL.Services
 
         private JwtSecurityToken GenerateToken(SigningCredentials signingCredentials, List<Claim> claims)
         {
-            var jwtSettings = configuration.GetSection("Jwt");
-            var expiration = DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("Lifetime").Value));
+            var expiration = DateTime.Now.AddMinutes(jwtSettings.Lifetime);
 
             var token = new JwtSecurityToken(
-                issuer: jwtSettings.GetSection("Issuer").Value,
+                issuer: jwtSettings.Issuer,
                 claims: claims,
                 expires: expiration,
                 signingCredentials: signingCredentials
@@ -102,8 +98,7 @@ namespace BLL.Services
 
         private SigningCredentials GetSigningCredentials()
         {
-            var jwtSettings = configuration.GetSection("Jwt");
-            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("Key").Value));
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
     }
