@@ -1,8 +1,10 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -75,6 +77,7 @@ namespace PL.Controllers
 
         // POST api/<EventsController>/Add
         [HttpPost("Add")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] EventModel _event)
         {
             try
@@ -90,6 +93,7 @@ namespace PL.Controllers
 
         // PUT api/<EventsController>/Update/5
         [HttpPut("Update/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Update(int id, [FromBody] EventModel _event)
         {
             try
@@ -106,6 +110,7 @@ namespace PL.Controllers
 
         // DELETE api/<EventsController>/5
         [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {
             await eventService.DeleteAsync(id);
@@ -122,6 +127,7 @@ namespace PL.Controllers
 
         // POST api/<EventsController>/Categories/Add
         [HttpPost("Categories/Add")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> AddCategory([FromBody] EventSubjectCategoryModel category)
         {
             try
@@ -137,6 +143,7 @@ namespace PL.Controllers
 
         // PUT api/<EventsController>/Update/5
         [HttpPut("Categories/Update/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> UpdateCategory(int id, [FromBody] EventSubjectCategoryModel category)
         {
             try
@@ -153,6 +160,7 @@ namespace PL.Controllers
 
         // DELETE api/<EventsController>/5
         [HttpDelete("Categories/Delete/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteCategory(int id)
         {
             await eventService.DeleteCategoryAsync(id);

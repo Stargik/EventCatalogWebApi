@@ -38,13 +38,13 @@ namespace BLL.Services
             await userManager.AddToRolesAsync(user, userModel.Roles);
         }
 
-        public async Task<string> LoginUser(UserModel userModel)
+        public async Task<string> LoginUser(UserLoginModel userLoginModel)
         {
-            if (!await ValidateUser(userModel))
+            if (!await ValidateUser(userLoginModel))
             {
                 throw new EventCatalogIdentityException();
             }
-            var user = await userManager.FindByNameAsync(userModel.Email);
+            var user = await userManager.FindByNameAsync(userLoginModel.Email);
             return await CreateToken(user);
         }
 
@@ -57,10 +57,10 @@ namespace BLL.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private async Task<bool> ValidateUser(UserModel userModel)
+        private async Task<bool> ValidateUser(UserLoginModel userLoginModel)
         {
-            var user = await userManager.FindByNameAsync(userModel.Email);
-            if (user is not null && await userManager.CheckPasswordAsync(user, userModel.Password))
+            var user = await userManager.FindByNameAsync(userLoginModel.Email);
+            if (user is not null && await userManager.CheckPasswordAsync(user, userLoginModel.Password))
             {
                 return true;
             }

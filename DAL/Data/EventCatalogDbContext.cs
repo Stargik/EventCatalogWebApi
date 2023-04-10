@@ -18,7 +18,9 @@ namespace DAL.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new EventFormatConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

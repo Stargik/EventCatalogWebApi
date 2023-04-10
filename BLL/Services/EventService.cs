@@ -70,7 +70,7 @@ namespace BLL.Services
 
         public async Task<EventModel> GetByIdAsync(int id)
         {
-            var _event = await eventRepository.GetByIdAsync(id);
+            var _event = await eventRepository.GetByIdWithDetailsAsync(id);
             var eventModel = mapper.Map<EventModel>(_event);
             return eventModel;
         }

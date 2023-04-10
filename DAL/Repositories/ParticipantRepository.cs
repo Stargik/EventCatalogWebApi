@@ -15,7 +15,7 @@ namespace DAL.Repositories
 
         public async Task<IEnumerable<Participant>> GetAllWithDetailsAsync()
         {
-            return await context.Participants.Include(participant => participant.Events).ToListAsync();
+            return await context.Participants.AsNoTracking().Include(participant => participant.Events).ToListAsync();
         }
 
         public async Task<Participant> GetByIdWithDetailsAsync(int id)

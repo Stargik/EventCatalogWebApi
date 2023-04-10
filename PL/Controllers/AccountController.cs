@@ -52,7 +52,7 @@ namespace PL.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserModel userModel)
+        public async Task<IActionResult> Login([FromBody] UserLoginModel userLoginModel)
         {
             if (!ModelState.IsValid)
             {
@@ -60,13 +60,13 @@ namespace PL.Controllers
             }
             try
             {
-                var resultToken = await accountService.LoginUser(userModel);
+                var resultToken = await accountService.LoginUser(userLoginModel);
 
                 return Accepted(new {Token = resultToken });
             }
             catch (Exception ex)
             {
-                return Unauthorized(userModel);
+                return Unauthorized(userLoginModel);
             }
         }
     }

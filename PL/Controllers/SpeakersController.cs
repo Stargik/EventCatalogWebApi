@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -47,19 +48,29 @@ namespace PL.Controllers
         [HttpGet("Event")]
         public async Task<ActionResult<SpeakerModel>> GetByEvent(int id)
         {
-            var speaker = await speakerService.GetSpeakerByEventIdAsync(id);
-            if (speaker is not null)
+            try
             {
-                return Ok(speaker);
+                var speaker = await speakerService.GetSpeakerByEventIdAsync(id);
+                if (speaker is not null)
+                {
+                    return Ok(speaker);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return NotFound();
             }
+            
+            
         }
 
         // POST api/<SpeakersController>
         [HttpPost("Add")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] SpeakerModel speaker)
         {
             try
@@ -75,6 +86,7 @@ namespace PL.Controllers
 
         // PUT api/<SpeakersController>/5
         [HttpPut("Update/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Update(int id, [FromBody] SpeakerModel speaker)
         {
             try
@@ -91,6 +103,7 @@ namespace PL.Controllers
 
         // DELETE api/<SpeakersController>/5
         [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {
             await speakerService.DeleteAsync(id);

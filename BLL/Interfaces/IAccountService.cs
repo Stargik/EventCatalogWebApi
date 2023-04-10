@@ -10,6 +10,6 @@ namespace BLL.Interfaces
     public interface IAccountService
     {
         Task RegisterUser(UserModel userModel);
-        Task<string> LoginUser(UserModel userModel);
+        Task<string> LoginUser(UserLoginModel userLoginModel);
     }
 }

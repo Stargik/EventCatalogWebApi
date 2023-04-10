@@ -15,18 +15,19 @@ namespace PL.Controllers
     public class ParticipantsController : ControllerBase
     {
         private readonly IParticipantService participantService;
+        private readonly IEventService eventService;
 
-        public ParticipantsController(IParticipantService participantService)
+        public ParticipantsController(IParticipantService participantService, IEventService eventService)
         {
             this.participantService = participantService;
+            this.eventService = eventService;
         }
 
         // GET: api/<ParticipantsController>
         [HttpGet]
-        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<ParticipantModel>>> Get()
         {
-            
+
             var participants = await participantService.GetAllAsync();
             return Ok(participants);
         }
@@ -50,19 +51,55 @@ namespace PL.Controllers
         [HttpGet("Event")]
         public async Task<ActionResult<IEnumerable<ParticipantModel>>> GetByEvent(int id)
         {
-            var participants = await participantService.GetParticipantsByEventIdAsync(id);
-            if (participants is not null)
+            try
             {
-                return Ok(participants);
+                var participants = await participantService.GetParticipantsByEventIdAsync(id);
+                if (participants is not null)
+                {
+                    return Ok(participants);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return NotFound();
             }
+
+        }
+
+        // GET api/<ParticipantsController>/Event/Add
+        [HttpPost("Event/Add")]
+        [Authorize]
+        public async Task<ActionResult> AddEvent(int id)
+        {
+            try
+            {
+                var participant = await participantService.GetByEmailAsync(User.Identity.Name);
+                if (participant is not null && !participant.EventsIds.Contains(id))
+                {
+                    participant.EventsIds.Clear();
+                    participant.EventsIds.Add(id);
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
         }
 
         // POST api/<ParticipantsController>
         [HttpPost("Add")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] ParticipantModel participant)
         {
             try
@@ -78,6 +115,7 @@ namespace PL.Controllers
 
         // PUT api/<ParticipantsController>/5
         [HttpPut("Update/{id}")]
+        [Authorize]
         public async Task<ActionResult> Update(int id, [FromBody] ParticipantModel participant)
         {
             try
@@ -94,6 +132,7 @@ namespace PL.Controllers
 
         // DELETE api/<ParticipantsController>/5
         [HttpDelete("Delete/{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {
             await participantService.DeleteAsync(id);

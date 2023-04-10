@@ -11,6 +11,7 @@ namespace BLL.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IParticipantRepository participantRepository;
+        private readonly IEventRepository eventRepository;
         private readonly IMapper mapper;
 
         public ParticipantService(IUnitOfWork unitOfWork, IMapper mapper)
@@ -18,6 +19,7 @@ namespace BLL.Services
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             participantRepository = unitOfWork.ParticipantRepository;
+            eventRepository = unitOfWork.EventRepository;
         }
         public async Task AddAsync(ParticipantModel model)
         {
@@ -47,6 +49,13 @@ namespace BLL.Services
             return participantModel;
         }
 
+        public async Task<ParticipantModel> GetByEmailAsync(string email)
+        {
+            var participant = (await participantRepository.GetAllWithDetailsAsync()).FirstOrDefault(participant => participant.Email == email);
+            var participantModel = mapper.Map<ParticipantModel>(participant);
+            return participantModel;
+        }
+
         public async Task<IEnumerable<ParticipantModel>> GetParticipantsByEventIdAsync(int eventId)
         {
             var _event = await unitOfWork.EventRepository.GetByIdWithDetailsAsync(eventId);
@@ -67,6 +76,8 @@ namespace BLL.Services
                 throw new EventCatalogException("Incorrect ParticipantModel info (participant with this id is not exist)", "Id");
             }
             var participant = mapper.Map<Participant>(model);
+            var events = (await eventRepository.GetAllAsync()).Where(_event => model.EventsIds.Contains(_event.Id)).ToList();
+            participant.Events = events;
             await participantRepository.UpdateAsync(participant);
             await unitOfWork.SaveAsync();
         }
