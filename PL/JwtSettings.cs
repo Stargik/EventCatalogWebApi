@@ -1,4 +1,4 @@
-﻿namespace BLL
+﻿namespace PL
 {
     public class JwtSettings
     {

@@ -1,16 +1,18 @@
 ﻿using AutoMapper;
-using BLL.Interfaces;
 using BLL.Models;
 using BLL.Validation;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace BLL.Services
+namespace PL.Services
 {
     public class AccountService : IAccountService
     {
@@ -28,7 +30,7 @@ namespace BLL.Services
         public async Task RegisterUser(UserModel userModel)
         {
             var user = mapper.Map<ApiUser>(userModel);
-            var result  = await userManager.CreateAsync(user, userModel.Password);
+            var result = await userManager.CreateAsync(user, userModel.Password);
 
             if (!result.Succeeded)
             {
