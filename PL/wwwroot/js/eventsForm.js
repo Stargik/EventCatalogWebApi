@@ -47,8 +47,10 @@ function displayEvents(data) {
         let headerTextNode = document.createTextNode(currentEvent.title);
         let descriptionTextNode = document.createTextNode(currentEvent.description);
         let addressTextNode = document.createTextNode("Адреса: " + currentEvent.address);
-        let startDateTimeTextNode = document.createTextNode("Початок: " + currentEvent.startDateTime);
-        let endDateTimeTextNode = document.createTextNode("Кінець: " + currentEvent.endDateTime);
+        let date = new Date(Date.parse(currentEvent.startDateTime)).toLocaleString('en-GB', { timeZone: 'UTC' });
+        let startDateTimeTextNode = document.createTextNode("Початок: " + date);
+        date = new Date(Date.parse(currentEvent.endDateTime)).toLocaleString('en-GB', { timeZone: 'UTC' });
+        let endDateTimeTextNode = document.createTextNode("Кінець: " + date);
 
         let headerInfo = document.createElement('h4');
         headerInfo.appendChild(headerTextNode);
