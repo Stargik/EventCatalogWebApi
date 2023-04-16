@@ -61,9 +61,13 @@ namespace PL.Controllers
             }
             try
             {
+                int participantId = (await participantService.GetByEmailAsync(userLoginModel.Email)).Id;
                 var resultToken = await accountService.LoginUser(userLoginModel);
 
-                return Accepted(new {Token = resultToken });
+                return Accepted(new {
+                    Token = resultToken,
+                    Id = participantId
+                });
             }
             catch (Exception ex)
             {

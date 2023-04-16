@@ -70,8 +70,8 @@ namespace PL.Controllers
 
         }
 
-        // GET api/<ParticipantsController>/Event/Add
-        [HttpPost("Event/Add")]
+        // GET api/<ParticipantsController>/Event
+        [HttpPost("Event")]
         [Authorize]
         public async Task<ActionResult> AddEvent(int id)
         {
@@ -82,6 +82,7 @@ namespace PL.Controllers
                 {
                     participant.EventsIds.Clear();
                     participant.EventsIds.Add(id);
+                    await participantService.UpdateAsync(participant);
 
                     return Ok();
                 }
