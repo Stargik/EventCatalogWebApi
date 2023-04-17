@@ -99,7 +99,7 @@ namespace PL.Controllers
         }
 
         // POST api/<ParticipantsController>
-        [HttpPost("Add")]
+        [HttpPost]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] ParticipantModel participant)
         {
@@ -115,7 +115,7 @@ namespace PL.Controllers
         }
 
         // PUT api/<ParticipantsController>/5
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult> Update(int id, [FromBody] ParticipantModel participant)
         {
@@ -132,7 +132,7 @@ namespace PL.Controllers
         }
 
         // DELETE api/<ParticipantsController>/5
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {

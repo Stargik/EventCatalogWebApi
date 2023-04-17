@@ -75,8 +75,8 @@ namespace PL.Controllers
             }
         }
 
-        // POST api/<EventsController>/Add
-        [HttpPost("Add")]
+        // POST api/<EventsController>
+        [HttpPost]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] EventModel _event)
         {
@@ -91,8 +91,8 @@ namespace PL.Controllers
             }
         }
 
-        // PUT api/<EventsController>/Update/5
-        [HttpPut("Update/{id}")]
+        // PUT api/<EventsController>/5
+        [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Update(int id, [FromBody] EventModel _event)
         {
@@ -109,7 +109,7 @@ namespace PL.Controllers
         }
 
         // DELETE api/<EventsController>/5
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -125,8 +125,8 @@ namespace PL.Controllers
             return Ok(events);
         }
 
-        // POST api/<EventsController>/Categories/Add
-        [HttpPost("Categories/Add")]
+        // POST api/<EventsController>/Categories
+        [HttpPost("Categories")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> AddCategory([FromBody] EventSubjectCategoryModel category)
         {
@@ -141,8 +141,8 @@ namespace PL.Controllers
             }
         }
 
-        // PUT api/<EventsController>/Update/5
-        [HttpPut("Categories/Update/{id}")]
+        // PUT api/<EventsController>/5
+        [HttpPut("Categories/{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> UpdateCategory(int id, [FromBody] EventSubjectCategoryModel category)
         {
@@ -159,7 +159,7 @@ namespace PL.Controllers
         }
 
         // DELETE api/<EventsController>/5
-        [HttpDelete("Categories/Delete/{id}")]
+        [HttpDelete("Categories/{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteCategory(int id)
         {

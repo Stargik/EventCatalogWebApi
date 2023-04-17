@@ -69,7 +69,7 @@ namespace PL.Controllers
         }
 
         // POST api/<SpeakersController>
-        [HttpPost("Add")]
+        [HttpPost]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Add([FromBody] SpeakerModel speaker)
         {
@@ -85,7 +85,7 @@ namespace PL.Controllers
         }
 
         // PUT api/<SpeakersController>/5
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Update(int id, [FromBody] SpeakerModel speaker)
         {
@@ -102,7 +102,7 @@ namespace PL.Controllers
         }
 
         // DELETE api/<SpeakersController>/5
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {

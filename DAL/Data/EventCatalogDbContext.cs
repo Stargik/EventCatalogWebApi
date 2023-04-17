@@ -12,7 +12,6 @@ namespace DAL.Data
         public EventCatalogDbContext(DbContextOptions<EventCatalogDbContext> options) 
             : base(options)
         {
-            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -23,10 +22,6 @@ namespace DAL.Data
             
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=EventCatalogDb; Trusted_Connection=True;");
-        }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<EventSubjectCategory> EventSubjectCategories { get; set; }
         public DbSet<EventFormat> EventFormats { get; set; }

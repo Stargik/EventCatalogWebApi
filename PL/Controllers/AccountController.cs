@@ -38,11 +38,9 @@ namespace PL.Controllers
             try
             {
                 await accountService.RegisterUser(userModel);
-                if (userModel.Roles.FirstOrDefault(roles => roles.ToUpper() == "USER") is not null)
-                {
-                    var participantModel = mapper.Map<ParticipantModel>(userModel);
-                    await participantService.AddAsync(participantModel);
-                }
+
+                var participantModel = mapper.Map<ParticipantModel>(userModel);
+                await participantService.AddAsync(participantModel);
                 
                 return Accepted();
             }
