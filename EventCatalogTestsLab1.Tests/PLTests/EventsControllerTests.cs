@@ -163,9 +163,9 @@ namespace EventCatalogTestsLab1.Tests.PLTests
         {
             await eventsController.Add(eventModel);
 
-            var participantModels = ((OkObjectResult)(await eventsController.Get()).Result).Value;
+            var eventModels = ((OkObjectResult)(await eventsController.Get()).Result).Value;
 
-            Assert.That(participantModels, Has.Member(eventModel).Using(new EventModelEqualityComparer()), message: "Add request works incorrect");
+            Assert.That(eventModels, Has.Member(eventModel).Using(new EventModelEqualityComparer()), message: "Add request works incorrect");
         }
 
         public static object[] newEventModels =

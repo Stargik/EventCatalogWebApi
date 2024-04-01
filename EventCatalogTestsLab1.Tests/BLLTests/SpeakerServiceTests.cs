@@ -86,6 +86,7 @@ namespace EventCatalogTestsLab1.Tests.BLLTests
             Assert.That(actual, Is.EquivalentTo(expected).Using(new SpeakerModelEqualityComparer()), message: "GetAllAsync method works incorrect");
         }
 
+        [Test]
         public async Task SpeakerService_AddAsync_AddsModel()
         {
 
@@ -105,7 +106,7 @@ namespace EventCatalogTestsLab1.Tests.BLLTests
 
             var speakerModels = await speakerService.GetAllAsync();
 
-            Assert.That(speakerModels, Has.Some.Property("Email").Match(@"^[^@\s]+@[^@\s]+\.[^@\s]+$").IgnoreCase, message: "AddAsync method works incorrect");
+            Assert.That(speakerModels, Has.All.Property("Email").Match(@"^[^@\s]+@[^@\s]+\.[^@\s]+$").IgnoreCase, message: "AddAsync method works incorrect");
         }
 
         [Test]
