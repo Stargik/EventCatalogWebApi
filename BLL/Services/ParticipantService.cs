@@ -4,6 +4,7 @@ using BLL.Models;
 using BLL.Validation;
 using DAL.Entities;
 using DAL.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace BLL.Services
 {
@@ -89,6 +90,10 @@ namespace BLL.Services
                 throw new EventCatalogException("Incorrect ParticipantModel info", "SpeakerModel");
             }
             if (String.IsNullOrEmpty(participantModel.Email))
+            {
+                throw new EventCatalogException("Incorrect ParticipantModel info", "Email");
+            }
+            if (!Regex.IsMatch(participantModel.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase))
             {
                 throw new EventCatalogException("Incorrect ParticipantModel info", "Email");
             }

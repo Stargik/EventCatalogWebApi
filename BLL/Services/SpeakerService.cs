@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Text.RegularExpressions;
+using AutoMapper;
 using BLL.Interfaces;
 using BLL.Models;
 using BLL.Validation;
@@ -67,10 +68,10 @@ namespace BLL.Services
         public async Task UpdateAsync(SpeakerModel model)
         {
             await SpeakerModelValidate(model);
-            var speakerOld = await speakerRepository.GetByIdAsync(model.Id);
+            var speakerOld = await speakerRepository.GetByIdWithDetailsAsync(model.Id);
             if (speakerOld is null)
             {
-                throw new EventCatalogException("Incorrect SpeakerModel info (speaker with this id is not exist)", "Id");
+               throw new EventCatalogException("Incorrect SpeakerModel info (speaker with this id is not exist)", "Id");
             }
             var speaker = mapper.Map<Speaker>(model);
             await speakerRepository.UpdateAsync(speaker);
@@ -84,6 +85,10 @@ namespace BLL.Services
                 throw new EventCatalogException("Incorrect SpeakerModel info", "SpeakerModel");
             }
             if (String.IsNullOrEmpty(speakerModel.Email))
+            {
+                throw new EventCatalogException("Incorrect SpeakerModel info", "Email");
+            }
+            if (!Regex.IsMatch(speakerModel.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase))
             {
                 throw new EventCatalogException("Incorrect SpeakerModel info", "Email");
             }

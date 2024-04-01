@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/css/bootstrap.css",
+      "PackagePath": "staticwebassets/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/css/style.css",
+      "PackagePath": "staticwebassets/css/style.css"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/js/bootstrap.js",
+      "PackagePath": "staticwebassets/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/wwwroot/js/eventsForm.js",
+      "PackagePath": "staticwebassets/js/eventsForm.js"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.WebApiPL.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.WebApiPL.props",
+      "PackagePath": "build\\WebApiPL.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.WebApiPL.props",
+      "PackagePath": "buildMultiTargeting\\WebApiPL.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.WebApiPL.props",
+      "PackagePath": "buildTransitive\\WebApiPL.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

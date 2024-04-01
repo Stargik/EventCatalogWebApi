@@ -15,7 +15,7 @@ namespace DAL.Repositories
 
         public async Task<IEnumerable<Speaker>> GetAllWithDetailsAsync()
         {
-            return await context.Speakers.Include(speaker => speaker.Events).ToListAsync();
+            return await context.Speakers.AsNoTracking().Include(speaker => speaker.Events).ToListAsync();
         }
 
         public async Task<Speaker> GetByIdWithDetailsAsync(int id)
