@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <RunSettingsFilePath>$(MSBuildProjectDirectory)\OnlyEventsTestConfig.runsettings</RunSettingsFilePath>
+    <RunSettingsFilePath>$(MSBuildProjectDirectory)\parallelTestConfig.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
 </Project>

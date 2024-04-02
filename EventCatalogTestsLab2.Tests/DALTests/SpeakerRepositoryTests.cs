@@ -27,7 +27,6 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             speakerRepository = new SpeakerRepository(context);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

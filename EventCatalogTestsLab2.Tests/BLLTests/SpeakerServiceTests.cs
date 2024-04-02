@@ -35,7 +35,6 @@ namespace EventCatalogTestsLab2.Tests.BLLTests
             }
             unitOfWork = new UnitOfWork(context);
             speakerService = new SpeakerService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

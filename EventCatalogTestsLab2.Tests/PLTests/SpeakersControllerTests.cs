@@ -35,7 +35,6 @@ namespace EventCatalogTestsLab2.Tests.PLTests
             unitOfWork = new UnitOfWork(context);
             speakerService = new SpeakerService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             speakersController = new SpeakersController(speakerService);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

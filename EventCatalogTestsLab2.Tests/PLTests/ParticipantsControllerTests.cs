@@ -37,7 +37,6 @@ namespace EventCatalogTestsLab2.Tests.PLTests
             participantService = new ParticipantService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             eventService = new EventService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             participantController = new ParticipantsController(participantService, eventService);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

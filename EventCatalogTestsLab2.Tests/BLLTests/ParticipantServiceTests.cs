@@ -34,7 +34,6 @@ namespace EventCatalogTestsLab2.Tests.BLLTests
             }
             unitOfWork = new UnitOfWork(context);
             participantService = new ParticipantService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

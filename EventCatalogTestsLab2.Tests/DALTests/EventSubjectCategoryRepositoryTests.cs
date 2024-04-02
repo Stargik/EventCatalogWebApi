@@ -27,7 +27,6 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             eventSubjectCategoryRepository = new EventSubjectCategoryRepository(context);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

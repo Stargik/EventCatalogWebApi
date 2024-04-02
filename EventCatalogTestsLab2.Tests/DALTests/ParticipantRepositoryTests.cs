@@ -26,7 +26,6 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             participantRepository = new ParticipantRepository(context);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()

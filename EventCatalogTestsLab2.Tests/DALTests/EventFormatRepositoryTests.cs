@@ -28,7 +28,6 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             eventFormatRepository = new EventFormatRepository(context);
-            Thread.Sleep(1000);
         }
 
         public void Dispose()
