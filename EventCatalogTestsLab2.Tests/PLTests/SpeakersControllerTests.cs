@@ -12,7 +12,8 @@ using PL.Controllers;
 
 namespace EventCatalogTestsLab2.Tests.PLTests
 {
-	public class SpeakersControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
+    [Collection("PLTests")]
+    public class SpeakersControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
         private UnitOfWork unitOfWork;
@@ -34,6 +35,7 @@ namespace EventCatalogTestsLab2.Tests.PLTests
             unitOfWork = new UnitOfWork(context);
             speakerService = new SpeakerService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             speakersController = new SpeakersController(speakerService);
+            Thread.Sleep(1000);
         }
 
         public void Dispose()
@@ -117,7 +119,7 @@ namespace EventCatalogTestsLab2.Tests.PLTests
         public async Task SpeakersController_Add_ReturnOkResult(SpeakerModel speakerModel)
         {
             var actual = await speakersController.Add(speakerModel);
-
+            Thread.Sleep(2000);
             Assert.IsType<OkResult>(actual);
         }
 

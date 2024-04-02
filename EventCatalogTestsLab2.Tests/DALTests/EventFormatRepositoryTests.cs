@@ -8,6 +8,7 @@ using Microsoft.SqlServer.Server;
 
 namespace EventCatalogTestsLab2.Tests.DALTests
 {
+    [Collection("DALTests")]
     public class EventFormatRepositoryTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
@@ -27,6 +28,7 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             eventFormatRepository = new EventFormatRepository(context);
+            Thread.Sleep(1000);
         }
 
         public void Dispose()

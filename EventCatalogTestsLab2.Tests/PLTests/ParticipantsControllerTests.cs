@@ -12,7 +12,8 @@ using PL.Controllers;
 
 namespace EventCatalogTestsLab2.Tests.PLTests
 {
-	public class ParticipantsControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
+    [Collection("PLTests")]
+    public class ParticipantsControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
         private UnitOfWork unitOfWork;
@@ -36,6 +37,7 @@ namespace EventCatalogTestsLab2.Tests.PLTests
             participantService = new ParticipantService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             eventService = new EventService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             participantController = new ParticipantsController(participantService, eventService);
+            Thread.Sleep(1000);
         }
 
         public void Dispose()

@@ -107,7 +107,7 @@ namespace EventCatalogTestsLab1.Tests.PLTests
         }
 
         [Test]
-        public async Task SpeakersController_GetWithIdParam_ReturnNotFoundResult([Random(100, 200, 3)] int id)
+        public async Task SpeakersController_GetWithIdParam_ReturnNotFoundResult([Range(100, 106, 3)] int id)
         {
             var actual = await speakersController.Get(id);
 

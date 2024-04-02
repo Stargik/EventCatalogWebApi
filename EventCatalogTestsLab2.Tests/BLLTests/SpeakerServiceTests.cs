@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventCatalogTestsLab2.Tests.BLLTests
 {
+    [Collection("BLLTests")]
     public class SpeakerServiceTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
@@ -34,6 +35,7 @@ namespace EventCatalogTestsLab2.Tests.BLLTests
             }
             unitOfWork = new UnitOfWork(context);
             speakerService = new SpeakerService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
+            Thread.Sleep(1000);
         }
 
         public void Dispose()

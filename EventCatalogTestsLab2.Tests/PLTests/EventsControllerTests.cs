@@ -12,7 +12,9 @@ using PL.Controllers;
 
 namespace EventCatalogTestsLab2.Tests.PLTests
 {
-	public class EventsControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
+    [Collection("PLTests")]
+    [Trait("TestCategory", "EventsTestCategory"), Trait("LayerCategory", "PLTests")]
+    public class EventsControllerTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
         private UnitOfWork unitOfWork;
@@ -34,6 +36,7 @@ namespace EventCatalogTestsLab2.Tests.PLTests
             unitOfWork = new UnitOfWork(context);
             eventService = new EventService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             eventsController = new EventsController(eventService);
+            Thread.Sleep(1000);
         }
 
         public void Dispose()
@@ -48,7 +51,7 @@ namespace EventCatalogTestsLab2.Tests.PLTests
         public async Task EventsController_Get_ReturnOkObjectResult()
         {
             var actual = await eventsController.Get();
-
+            
             Assert.IsType<OkObjectResult>(actual.Result);
         }
 

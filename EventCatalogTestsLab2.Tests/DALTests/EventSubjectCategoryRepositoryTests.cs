@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventCatalogTestsLab2.Tests.DALTests
 {
-	public class EventSubjectCategoryRepositoryTests : IDisposable, IClassFixture<EventCatalogFixture>
+    [Collection("DALTests")]
+    public class EventSubjectCategoryRepositoryTests : IDisposable, IClassFixture<EventCatalogFixture>
     {
         private EventCatalogDbContext context;
         private EventSubjectCategoryRepository eventSubjectCategoryRepository;
@@ -26,6 +27,7 @@ namespace EventCatalogTestsLab2.Tests.DALTests
             }
 
             eventSubjectCategoryRepository = new EventSubjectCategoryRepository(context);
+            Thread.Sleep(1000);
         }
 
         public void Dispose()
