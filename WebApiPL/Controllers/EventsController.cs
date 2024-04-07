@@ -30,6 +30,13 @@ namespace PL.Controllers
             return Ok(events);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<string>> GetUpcomingEventInfo()
+        {
+            var _event = eventService.GetUpcomingEventInfo();
+            return Ok(_event);
+        }
+
         // GET api/<EventsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EventModel>> Get(int id)

@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using BLL.Interfaces;
 using BLL.Models;
 using BLL.Services;
+using BLL.Validation;
 using DAL.Data;
 using DAL.Entities;
+using DAL.Interfaces;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moq;
+using NUnit.Framework.Internal.Execution;
 using PL.Controllers;
 
 namespace EventCatalogTestsLab1.Tests.PLTests
@@ -18,6 +23,8 @@ namespace EventCatalogTestsLab1.Tests.PLTests
         private EventService eventService;
         private EventsController eventsController;
         private IEnumerable<EventModel> expectedEventModels;
+        private Mock<IEventService> eventServiceMock;
+
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -79,6 +86,7 @@ namespace EventCatalogTestsLab1.Tests.PLTests
             unitOfWork = new UnitOfWork(context);
             eventService = new EventService(unitOfWork, UnitTestHelper.GetAutoMapperProfile());
             eventsController = new EventsController(eventService);
+            eventServiceMock = new Mock<IEventService>() { CallBase = true };
         }
 
         [OneTimeTearDown]
@@ -166,6 +174,120 @@ namespace EventCatalogTestsLab1.Tests.PLTests
             var eventModels = ((OkObjectResult)(await eventsController.Get()).Result).Value;
 
             Assert.That(eventModels, Has.Member(eventModel).Using(new EventModelEqualityComparer()), message: "Add request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_Update_ReturnOkResult()
+        {
+            var updatedEventModel = new EventModel
+            {
+                Id = 1,
+                Title = "NewTitle",
+                Description = "Description1",
+                Address = "Addrees1",
+                StartDateTime = new DateTime(2025, 10, 11, 7, 0, 0),
+                EndDateTime = new DateTime(2025, 10, 11, 9, 0, 0),
+                SpeakerId = 1,
+                EventSubjectCategoryId = 1,
+                EventFormatId = 1,
+                ParticipantsIds = new List<int>()
+            };
+
+            eventServiceMock.Setup(m => m.UpdateAsync(It.IsAny<EventModel>()));
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = await eventsControllerMock.Update(updatedEventModel.Id, updatedEventModel);
+
+            eventServiceMock.Verify(x => x.UpdateAsync(It.Is<EventModel>(c => c.Id == updatedEventModel.Id && c.Title == updatedEventModel.Title)), Times.Once);
+            Assert.IsInstanceOf<OkResult>(actual, message: "Update request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_Update_ReturnBadResult()
+        {
+            var updatedEventModel = new EventModel
+            {
+                Id = 1,
+                Title = "",
+                Description = "Description1",
+                Address = "Addrees1",
+                StartDateTime = new DateTime(2025, 10, 11, 7, 0, 0),
+                EndDateTime = new DateTime(2025, 10, 11, 9, 0, 0),
+                SpeakerId = 1,
+                EventSubjectCategoryId = 1,
+                EventFormatId = 1,
+                ParticipantsIds = new List<int>()
+            };
+
+            eventServiceMock.Setup(m => m.UpdateAsync(It.IsAny<EventModel>())).ThrowsAsync(new Exception());
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = await eventsControllerMock.Update(updatedEventModel.Id, updatedEventModel);
+
+            eventServiceMock.Verify(x => x.UpdateAsync(It.Is<EventModel>(c => c.Id == updatedEventModel.Id && c.Title == updatedEventModel.Title)), Times.Once);
+            Assert.IsInstanceOf<BadRequestResult>(actual, message: "Update method works incorrect");
+
+        }
+
+        [Test]
+        public async Task EventsController_GetUpcomingEventInfo_ReturnBaseInfo()
+        {
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = ((OkObjectResult)(await eventsControllerMock.GetUpcomingEventInfo()).Result).Value;
+
+            eventServiceMock.Verify(x => x.GetUpcomingEventInfo(), Times.Once);
+            Assert.That(actual, Is.EqualTo($"There are no events."), message: "Info request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_GetByCategory_ReturnOkObjectResult([Range(1, 2, 1)] int categoryId)
+        {
+            eventServiceMock.Setup(m => m.GetEventsByCategoryIdAsync(categoryId)).ReturnsAsync(expectedEventModels.Where(x => x.EventSubjectCategoryId == categoryId));
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = await eventsControllerMock.GetByCategory(categoryId);
+            eventServiceMock.Verify(x => x.GetEventsByCategoryIdAsync(categoryId), Times.Once);
+
+            Assert.IsInstanceOf<OkObjectResult>(actual.Result, message: "GetByCategory request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_GetByCategory_ReturnCorrectModelType([Range(1, 2, 1)] int categoryId)
+        {
+            eventServiceMock.Setup(m => m.GetEventsByCategoryIdAsync(categoryId)).ReturnsAsync(expectedEventModels.Where(x => x.EventSubjectCategoryId == categoryId));
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = await eventsControllerMock.GetByCategory(categoryId);
+            eventServiceMock.Verify(x => x.GetEventsByCategoryIdAsync(categoryId), Times.Once);
+
+            Assert.IsInstanceOf<IEnumerable<EventModel>>(((OkObjectResult)actual.Result).Value, message: "GetByCategory request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_GetByCategory_ReturnCorrectModelContent([Range(1, 2, 1)] int categoryId)
+        {
+            var expected = expectedEventModels.Where(x => x.EventSubjectCategoryId == categoryId);
+
+            eventServiceMock.Setup(m => m.GetEventsByCategoryIdAsync(categoryId)).ReturnsAsync(expectedEventModels.Where(x => x.EventSubjectCategoryId == categoryId));
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = ((OkObjectResult)(await eventsControllerMock.GetByCategory(categoryId)).Result).Value;
+            eventServiceMock.Verify(x => x.GetEventsByCategoryIdAsync(categoryId), Times.Once);
+
+            Assert.That(actual, Is.EquivalentTo(expected).Using(new EventModelEqualityComparer()), message: "GetByCategory request works incorrect");
+        }
+
+        [Test]
+        public async Task EventsController_GetByCategory_ReturnNotFoundResult([Range(100, 106, 3)] int categoryId)
+        {
+            eventServiceMock.Setup(m => m.GetEventsByCategoryIdAsync(It.IsAny<int>())).ReturnsAsync(null as IEnumerable<EventModel>);
+            var eventsControllerMock = new EventsController(eventServiceMock.Object);
+
+            var actual = await eventsControllerMock.GetByCategory(categoryId);
+            eventServiceMock.Verify(x => x.GetEventsByCategoryIdAsync(categoryId), Times.Once);
+
+            Assert.IsInstanceOf<NotFoundResult>(actual.Result, message: "GetByCategory method works incorrect");
         }
 
         public static object[] newEventModels =

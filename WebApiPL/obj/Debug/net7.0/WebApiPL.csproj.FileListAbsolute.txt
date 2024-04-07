@@ -1,3 +1,11 @@
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.csproj.AssemblyReference.cache
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.AssemblyInfoInputs.cache
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.AssemblyInfo.cs
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.csproj.CoreCompileInputs.cache
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.MvcApplicationPartsAssemblyInfo.cs
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.MvcApplicationPartsAssemblyInfo.cache
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.sourcelink.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/appsettings.Development.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/appsettings.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/WebApiPL.staticwebassets.runtime.json
@@ -267,14 +275,6 @@
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/DAL.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/BLL.pdb
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/bin/Debug/net7.0/DAL.pdb
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.csproj.AssemblyReference.cache
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.GeneratedMSBuildEditorConfig.editorconfig
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.AssemblyInfoInputs.cache
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.AssemblyInfo.cs
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.csproj.CoreCompileInputs.cache
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.MvcApplicationPartsAssemblyInfo.cs
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.MvcApplicationPartsAssemblyInfo.cache
-/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/WebApiPL.sourcelink.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/staticwebassets.build.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/staticwebassets.development.json
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/WebApiPL/obj/Debug/net7.0/staticwebassets/msbuild.WebApiPL.Microsoft.AspNetCore.StaticWebAssets.props

@@ -115,6 +115,12 @@ namespace BLL.Services
             await unitOfWork.SaveAsync();
         }
 
+        public async virtual Task<string> GetUpcomingEventInfo()
+        {
+            var _event = (await eventRepository.GetAllAsync()).OrderBy(e => e.StartDateTime).First();
+            return $"Title: {_event.Title}; Start at: {_event.StartDateTime}";
+        }
+
         private async Task EventModelValidate(EventModel eventModel)
         {
             if (eventModel is null)

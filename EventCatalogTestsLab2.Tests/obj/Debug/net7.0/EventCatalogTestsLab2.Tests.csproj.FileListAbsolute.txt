@@ -16,6 +16,7 @@
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Azure.Core.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Azure.Identity.dll
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Castle.Core.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/FluentAssertions.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Humanizer.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -81,6 +82,7 @@
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Moq.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/NuGet.Common.dll
 /Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/bin/Debug/net7.0/NuGet.Configuration.dll

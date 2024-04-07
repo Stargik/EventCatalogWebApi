@@ -12,5 +12,7 @@ namespace BLL.Interfaces
         Task DeleteCategoryAsync(int categoryId);
         Task UpdateCategoryAsync(EventSubjectCategoryModel categoryModel);
 
+        string GetUpcomingEventInfo() { return "There are no events."; }
+
     }
 }

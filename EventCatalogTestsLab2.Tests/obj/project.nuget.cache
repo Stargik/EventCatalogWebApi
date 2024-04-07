@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZDxZymLEz7oVbzLUiZe1HZioWZyX2YrFLySH9lMBGgQoja6f/JJcgWpdMxAKwZIyE0T3CpaAVjuiYWc/Sxng1w==",
+  "dgSpecHash": "LSlmvS09hKDG7IH1LqQh8RPGeDMoV8bK7zWZfu6Xs1E7X3cCAJ53WnqJXEuLn3XHy4Y5dPejm903zEN9ZRG41A==",
   "success": true,
   "projectFilePath": "/Users/aleksandrstarzhynskyi/Repositories/Git/GitHub/EventCatalogWebApi/EventCatalogTestsLab2.Tests/EventCatalogTestsLab2.Tests.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/aleksandrstarzhynskyi/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
+    "/Users/aleksandrstarzhynskyi/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/fluentassertions/6.12.0/fluentassertions.6.12.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
@@ -106,6 +107,7 @@
     "/Users/aleksandrstarzhynskyi/.nuget/packages/microsoft.win32.primitives/4.3.0/microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/aleksandrstarzhynskyi/.nuget/packages/moq/4.20.70/moq.4.20.70.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/nuget.common/6.3.1/nuget.common.6.3.1.nupkg.sha512",
@@ -153,6 +155,7 @@
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.data.datasetextensions/4.5.0/system.data.datasetextensions.4.5.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.diagnostics.debug/4.3.0/system.diagnostics.debug.4.3.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.diagnostics.diagnosticsource/5.0.0/system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
+    "/Users/aleksandrstarzhynskyi/.nuget/packages/system.diagnostics.eventlog/6.0.0/system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.diagnostics.tools/4.3.0/system.diagnostics.tools.4.3.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.diagnostics.tracing/4.3.0/system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "/Users/aleksandrstarzhynskyi/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
